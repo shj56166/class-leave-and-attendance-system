@@ -240,6 +240,6 @@ npm run db:reset:demo
   <p style="margin: 0 0 8px 0; color: #5c7cbd;"><strong>介绍</strong></p>
   <p style="margin: 0 0 8px 0; color: #5f6b7a;">其实这个项目是被老师无视了，因为要租用服务器，老师非得找免费的 <span style="color: #7c8fb3;">TvT</span>，一气之下直接开源。</p>
   <p style="margin: 0 0 8px 0; color: #5f6b7a;">耗时 <span style="color: #c97b63;">21 天</span>，<span style="color: #6d82b5;">Claude 4.6 Opus</span> 搭基座，<span style="color: #4f7f9d;">Codex 5.4</span> 完善功能，消耗 <span style="color: #b7795f;">50.11 RMB</span>。</p>
-  <p style="margin: 0 0 8px 0; color: #7a6f97;">还有十几天就 17 ✌</p>
+  <p style="margin: 0 0 8px 0; color: #7a6f97;">还有十几天就 17岁了 ✌</p>
   <p style="margin: 0; color: #8a94a6;">2026/4/21</p>
 </div>
