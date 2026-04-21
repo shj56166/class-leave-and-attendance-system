@@ -7,6 +7,9 @@ server/.env
 server/.env.*
 !server/.env.example
 *.log
+*.bak
+*.old
+*.orig
 logs/
 backups/
 ssl/

@@ -2,8 +2,8 @@ const { test, expect } = require('@playwright/test');
 const bcrypt = require('../../server/node_modules/bcryptjs');
 const { Sequelize } = require('../../server/node_modules/sequelize');
 
-const TEACHER_BASE_URL = 'http://localhost:5174';
-const STUDENT_BASE_URL = 'http://localhost:5173';
+const TEACHER_BASE_URL = process.env.TEACHER_BASE_URL || 'http://127.0.0.1:5174';
+const STUDENT_BASE_URL = process.env.STUDENT_BASE_URL || 'http://127.0.0.1:5175';
 
 let classCode = '';
 

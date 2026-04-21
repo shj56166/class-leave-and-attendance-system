@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "description": "校园请假管理 Demo 的端到端浏览器测试工具层",
+  "author": "Open Source Maintainer",
+  "license": "MIT",
   "scripts": {
     "dev:windows": "powershell -ExecutionPolicy Bypass -File .\\scripts\\start-dev.ps1",
     "db:reset:demo": "powershell -ExecutionPolicy Bypass -File .\\scripts\\reset-demo-database.ps1",

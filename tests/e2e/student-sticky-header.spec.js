@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-const STUDENT_BASE_URL = 'http://localhost:5173';
+const STUDENT_BASE_URL = process.env.STUDENT_BASE_URL || 'http://127.0.0.1:5175';
 
 const mockStudent = {
   id: 1,
