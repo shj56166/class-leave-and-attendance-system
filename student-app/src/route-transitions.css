@@ -1,0 +1,152 @@
+:root {
+  --route-motion-duration-none: 1ms;
+  --route-motion-duration-fade: 240ms;
+  --route-motion-duration-fade-lite: 200ms;
+  --route-motion-duration-stack: 180ms;
+  --route-motion-duration-stack-lite: 150ms;
+  --route-motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --route-stage-backdrop-color: #eef4ff;
+  --route-stage-backdrop-image:
+    radial-gradient(circle at top right, rgba(79, 148, 255, 0.14) 0%, rgba(79, 148, 255, 0) 34%),
+    radial-gradient(circle at bottom left, rgba(34, 197, 94, 0.06) 0%, rgba(34, 197, 94, 0) 24%),
+    linear-gradient(180deg, #f8fbff 0%, #eef4ff 36%, #e6eefb 100%);
+}
+
+html,
+body,
+#app,
+.app-root {
+  min-height: 100%;
+  background-color: var(--route-stage-backdrop-color);
+  background-image: var(--route-stage-backdrop-image);
+  background-repeat: no-repeat;
+}
+
+.route-scene {
+  width: 100%;
+  min-width: 0;
+  backface-visibility: hidden;
+}
+
+.route-stage {
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+}
+
+.route-stage--root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: clip;
+  background-color: var(--route-stage-backdrop-color);
+  background-image: var(--route-stage-backdrop-image);
+  background-repeat: no-repeat;
+}
+
+.route-stage--tab {
+  min-height: 100%;
+  overflow-x: clip;
+}
+
+.route-scene--root {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.route-scene--tab {
+  min-height: 100%;
+}
+
+.route-none-enter-active,
+.route-none-leave-active {
+  transition: none !important;
+}
+
+.route-fade-soft-enter-active,
+.route-fade-soft-leave-active {
+  transition: opacity var(--route-motion-duration-fade) var(--route-motion-ease);
+  will-change: opacity;
+}
+
+.route-stage > .route-fade-soft-enter-active {
+  position: relative;
+  z-index: 2;
+}
+
+.route-stage > .route-fade-soft-leave-active {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  min-height: 100%;
+  pointer-events: none;
+}
+
+.route-fade-soft-enter-from {
+  opacity: 0;
+}
+
+.route-fade-soft-enter-to,
+.route-fade-soft-leave-from {
+  opacity: 1;
+}
+
+.route-fade-soft-leave-to {
+  opacity: 0;
+}
+
+.route-slide-soft-forward-enter-active,
+.route-slide-soft-forward-leave-active,
+.route-slide-soft-back-enter-active,
+.route-slide-soft-back-leave-active {
+  transition: opacity var(--route-motion-duration-stack) var(--route-motion-ease);
+  will-change: opacity;
+}
+
+.route-slide-soft-forward-enter-from {
+  opacity: 0;
+}
+
+.route-slide-soft-forward-leave-to {
+  opacity: 0;
+}
+
+.route-slide-soft-back-enter-from {
+  opacity: 0;
+}
+
+.route-slide-soft-back-leave-to {
+  opacity: 0;
+}
+
+.route-scene[data-route-motion-tier='lite'].route-fade-soft-enter-active,
+.route-scene[data-route-motion-tier='lite'].route-fade-soft-leave-active {
+  transition-duration: var(--route-motion-duration-fade-lite);
+}
+
+.route-scene[data-route-motion-tier='lite'].route-slide-soft-forward-enter-active,
+.route-scene[data-route-motion-tier='lite'].route-slide-soft-forward-leave-active,
+.route-scene[data-route-motion-tier='lite'].route-slide-soft-back-enter-active,
+.route-scene[data-route-motion-tier='lite'].route-slide-soft-back-leave-active {
+  transition-duration: var(--route-motion-duration-stack-lite);
+}
+
+.route-scene[data-route-motion-tier='none'].route-fade-soft-enter-active,
+.route-scene[data-route-motion-tier='none'].route-fade-soft-leave-active,
+.route-scene[data-route-motion-tier='none'].route-slide-soft-forward-enter-active,
+.route-scene[data-route-motion-tier='none'].route-slide-soft-forward-leave-active,
+.route-scene[data-route-motion-tier='none'].route-slide-soft-back-enter-active,
+.route-scene[data-route-motion-tier='none'].route-slide-soft-back-leave-active {
+  transition-duration: var(--route-motion-duration-none) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-fade-soft-enter-active,
+  .route-fade-soft-leave-active,
+  .route-slide-soft-forward-enter-active,
+  .route-slide-soft-forward-leave-active,
+  .route-slide-soft-back-enter-active,
+  .route-slide-soft-back-leave-active {
+    transition-duration: var(--route-motion-duration-none) !important;
+  }
+}

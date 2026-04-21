@@ -1,0 +1,7 @@
+include ':app'
+include ':capacitor-cordova-android-plugins'
+include ':jiguang'
+project(':capacitor-cordova-android-plugins').projectDir = new File('./capacitor-cordova-android-plugins/')
+project(':jiguang').projectDir = new File('./jiguang')
+
+apply from: 'capacitor.settings.gradle'

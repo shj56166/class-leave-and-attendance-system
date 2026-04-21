@@ -1,0 +1,422 @@
+/* Teacher Dashboard - Global Styles */
+/* Design System: Data-Dense Dashboard */
+/* Generated: 2026-03-13 */
+
+/* CSS Variables - Design System */
+:root {
+  /* Colors - Glassmorphism Theme */
+  --color-primary: #1E40AF;
+  --color-secondary: #3B82F6;
+  --color-cta: #22C55E;
+  --color-background: #EFF6FF;
+  --color-text: #1E3A8A;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+  --blur-amount: 24px;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+
+  /* Typography - System Fonts */
+  --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 300ms ease;
+
+  /* Teacher action buttons */
+  --teacher-action-radius: 999px;
+  --teacher-action-height: 40px;
+  --teacher-action-height-small: 34px;
+  --teacher-action-height-large: 46px;
+  --teacher-action-padding-x: 30px;
+  --teacher-action-padding-x-small: 20px;
+  --teacher-action-padding-x-large: 32px;
+  --teacher-action-font-size: 14px;
+  --teacher-action-font-size-small: 13px;
+  --teacher-action-font-size-large: 15px;
+  --teacher-action-font-weight: 700;
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+html.ui-user-disable-blur body .dashboard-shell--no-blur .dashboard-main .el-card,
+html.ui-user-disable-blur body .dashboard-shell--no-blur .dashboard-header,
+html.ui-user-disable-blur body .dashboard-shell--no-blur .teacher-settings-item,
+html.ui-user-disable-blur body .dashboard-shell--no-blur .teacher-settings-danger {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-color: rgba(255, 255, 255, 0.86) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.ui-user-disable-blur body .dashboard-shell--no-blur .teacher-nav-panel {
+  background:
+    linear-gradient(180deg, rgba(30, 58, 138, 0.96) 0%, rgba(37, 99, 235, 0.9) 100%) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html.ui-user-disable-blur body .dashboard-shell--no-blur .teacher-nav-quick-setting,
+html.ui-user-disable-blur body .dashboard-shell--no-blur .teacher-nav-user {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+html.ui-user-disable-blur body .login-container,
+html.ui-user-disable-blur body .dashboard-shell--no-blur {
+  background:
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0) 34%),
+    radial-gradient(circle at bottom left, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0) 28%),
+    linear-gradient(135deg, #eff6ff 0%, #dbeafe 58%, #bfdbfe 100%) !important;
+}
+
+html.ui-user-reduce-effects body *,
+html.ui-user-reduce-effects body *::before,
+html.ui-user-reduce-effects body *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-bottom: var(--space-md);
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-normal);
+}
+
+a:hover {
+  color: var(--color-secondary);
+}
+
+/* Buttons */
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.btn-primary {
+  background: var(--color-cta);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.btn-secondary:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.teacher-action-button.el-button {
+  --teacher-action-bg: #2f95ff;
+  --teacher-action-hover-bg: #6fc5ff;
+  --teacher-action-active-bg: #3d94cf;
+  --teacher-action-text: #ffffff;
+  --teacher-action-shadow: rgba(43, 168, 251, 0.28);
+  --teacher-action-glow: rgba(111, 197, 255, 0.32);
+  --teacher-action-disabled-bg: rgba(191, 219, 254, 0.9);
+  --teacher-action-disabled-text: rgba(69, 97, 146, 0.88);
+  --teacher-action-sheen: rgba(255, 255, 255, 0.26);
+  min-height: var(--teacher-action-height);
+  height: auto !important;
+  padding: 12.5px var(--teacher-action-padding-x) !important;
+  border-radius: var(--teacher-action-radius) !important;
+  border: 0 !important;
+  background: var(--teacher-action-bg) !important;
+  color: var(--teacher-action-text) !important;
+  font-weight: var(--teacher-action-font-weight);
+  font-size: var(--teacher-action-font-size);
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 12px 28px var(--teacher-action-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease,
+    box-shadow 0.5s ease,
+    transform 0.5s ease,
+    filter 0.5s ease;
+}
+
+.teacher-action-button.el-button::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, var(--teacher-action-sheen) 0%, rgba(255, 255, 255, 0) 58%);
+  pointer-events: none;
+}
+
+.teacher-action-button.el-button .el-button__text,
+.teacher-action-button.el-button .el-icon,
+.teacher-action-button.el-button .el-button__loader {
+  position: relative;
+  z-index: 1;
+}
+
+.teacher-action-button.el-button.el-button--small {
+  min-height: var(--teacher-action-height-small);
+  padding: 9.5px var(--teacher-action-padding-x-small) !important;
+  font-size: var(--teacher-action-font-size-small);
+}
+
+.teacher-action-button.el-button.el-button--large {
+  min-height: var(--teacher-action-height-large);
+  padding: 13.5px var(--teacher-action-padding-x-large) !important;
+  font-size: var(--teacher-action-font-size-large);
+}
+
+.teacher-action-button.el-button:not(.is-disabled):not(.is-loading):hover,
+.teacher-action-button.el-button:not(.is-disabled):not(.is-loading):focus-visible {
+  background: var(--teacher-action-hover-bg) !important;
+  color: var(--teacher-action-text) !important;
+  box-shadow:
+    0 0 20px var(--teacher-action-glow),
+    0 16px 30px var(--teacher-action-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: scale(1.04);
+  filter: saturate(1.03);
+}
+
+.teacher-action-button.el-button:not(.is-disabled):not(.is-loading):active {
+  background: var(--teacher-action-active-bg) !important;
+  box-shadow: none !important;
+  transition-duration: 0.25s;
+  transform: scale(0.985);
+  filter: saturate(0.98);
+}
+
+.teacher-action-button.el-button.is-disabled,
+.teacher-action-button.el-button.is-disabled:hover {
+  background: var(--teacher-action-disabled-bg) !important;
+  color: var(--teacher-action-disabled-text) !important;
+  transform: none;
+  box-shadow: none !important;
+  filter: none;
+  opacity: 0.82;
+}
+
+.teacher-action-button--primary.el-button {
+  --teacher-action-bg: #2f95ff;
+  --teacher-action-hover-bg: #6fc5ff;
+  --teacher-action-active-bg: #3d94cf;
+  --teacher-action-text: #ffffff;
+  --teacher-action-shadow: rgba(43, 168, 251, 0.28);
+  --teacher-action-glow: rgba(111, 197, 255, 0.32);
+  --teacher-action-disabled-bg: rgba(147, 197, 253, 0.78);
+  --teacher-action-disabled-text: rgba(255, 255, 255, 0.94);
+}
+
+.teacher-action-button--success.el-button {
+  --teacher-action-bg: #7cc94c;
+  --teacher-action-hover-bg: #9fda70;
+  --teacher-action-active-bg: #67b53f;
+  --teacher-action-text: #ffffff;
+  --teacher-action-shadow: rgba(124, 201, 76, 0.26);
+  --teacher-action-glow: rgba(159, 218, 112, 0.28);
+  --teacher-action-disabled-bg: rgba(187, 247, 208, 0.88);
+  --teacher-action-disabled-text: rgba(255, 255, 255, 0.94);
+}
+
+.teacher-action-button--danger.el-button {
+  --teacher-action-bg: #f37b7b;
+  --teacher-action-hover-bg: #f8a0a0;
+  --teacher-action-active-bg: #df6363;
+  --teacher-action-text: #ffffff;
+  --teacher-action-shadow: rgba(243, 123, 123, 0.24);
+  --teacher-action-glow: rgba(248, 160, 160, 0.3);
+  --teacher-action-disabled-bg: rgba(254, 202, 202, 0.9);
+  --teacher-action-disabled-text: rgba(255, 255, 255, 0.94);
+}
+
+.teacher-action-button--secondary.el-button {
+  --teacher-action-bg: rgba(248, 251, 255, 0.96);
+  --teacher-action-hover-bg: rgba(231, 243, 255, 0.98);
+  --teacher-action-active-bg: rgba(216, 233, 252, 0.96);
+  --teacher-action-text: #42639f;
+  --teacher-action-shadow: rgba(166, 184, 214, 0.22);
+  --teacher-action-glow: rgba(191, 219, 254, 0.34);
+  --teacher-action-disabled-bg: rgba(241, 245, 249, 0.92);
+  --teacher-action-disabled-text: rgba(125, 144, 176, 0.92);
+  --teacher-action-sheen: rgba(255, 255, 255, 0.5);
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Inputs */
+input, textarea, select {
+  font-family: var(--font-body);
+  padding: 12px 16px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color var(--transition-normal);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+/* Utility Classes */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus Visible */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Scrollbar Styling - Windows only; mobile keeps system defaults */
+html.ui-platform-windows {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.8) transparent;
+}
+
+html.ui-platform-windows ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+html.ui-platform-windows ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html.ui-platform-windows ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.8);
+  border-radius: 999px;
+}
+
+html.ui-platform-windows ::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 134, 156, 0.9);
+}

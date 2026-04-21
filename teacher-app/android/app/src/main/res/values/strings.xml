@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Qingjia Teacher</string>
+    <string name="title_activity_main">Qingjia Teacher</string>
+    <string name="package_name">com.qingjia.teacher</string>
+    <string name="custom_url_scheme">com.qingjia.teacher</string>
+</resources>

@@ -1,0 +1,35 @@
+{
+  "name": "teacher-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "cap:sync": "npx cap sync android",
+    "cap:open:android": "npx cap open android",
+    "android:debug": "npm run build && npm run cap:sync && npm run cap:open:android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.3.0",
+    "@capacitor/app": "^8.1.0",
+    "@capacitor/cli": "^8.2.0",
+    "@capacitor/core": "^8.2.0",
+    "@capacitor/device": "^8.0.2",
+    "@capacitor/local-notifications": "^8.0.2",
+    "@element-plus/icons-vue": "^2.3.2",
+    "axios": "^1.13.6",
+    "echarts": "^6.0.0",
+    "element-plus": "^2.13.5",
+    "pinia": "^3.0.4",
+    "socket.io-client": "^4.8.3",
+    "vue": "^3.5.25",
+    "vue-router": "^5.0.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.2",
+    "typescript": "^6.0.2",
+    "vite": "^7.3.1"
+  }
+}

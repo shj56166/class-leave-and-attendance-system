@@ -1,0 +1,147 @@
+import java.util.Properties
+
+apply plugin: 'com.android.application'
+
+def loadOptionalProperties(List<String> relativePaths) {
+    def props = new Properties()
+    relativePaths.each { relativePath ->
+        if (!relativePath) {
+            return
+        }
+
+        def propsFile = file(relativePath)
+        if (propsFile.exists()) {
+            propsFile.withInputStream { stream ->
+                props.load(stream)
+            }
+        }
+    }
+
+    def normalizedProps = new Properties()
+    props.each { key, value ->
+        def normalizedKey = key == null ? '' : key.toString().replace('\uFEFF', '').trim()
+        def normalizedValue = value == null ? '' : value.toString().trim()
+        if (normalizedKey) {
+            normalizedProps.setProperty(normalizedKey, normalizedValue)
+        }
+    }
+
+    return normalizedProps
+}
+
+def jpushProperties = loadOptionalProperties([
+    '../jpush.local.properties',
+    'jpush.local.properties',
+    '../local.properties',
+    'local.properties'
+])
+def resolveJPushValue = { String key, String fallback = '' ->
+    def envValue = System.getenv(key)
+    if (envValue != null && envValue.toString().trim()) {
+        return envValue.toString().trim()
+    }
+
+    def propValue = jpushProperties.getProperty(key)
+    if (propValue != null && propValue.toString().trim()) {
+        return propValue.toString().trim()
+    }
+
+    return fallback
+}
+
+def jpushAppKey = resolveJPushValue('JPUSH_APPKEY', '__UNSET__')
+def jpushChannel = resolveJPushValue('JPUSH_CHANNEL', 'developer-default')
+def vivoAppKey = resolveJPushValue('VIVO_APPKEY', '')
+def vivoAppId = resolveJPushValue('VIVO_APPID', '')
+def honorAppId = resolveJPushValue('HONOR_APPID', '')
+def jpushSdkPresent = !fileTree(dir: '../jiguang/libs', include: ['*.jar', '*.aar']).files.isEmpty()
+def jpushEnabled = jpushAppKey != '__UNSET__' && jpushSdkPresent
+def vivoPushConfigured = jpushEnabled && Boolean.valueOf(String.valueOf(vivoAppKey?.trim() && vivoAppId?.trim()))
+def honorPushConfigured = jpushEnabled && Boolean.valueOf(String.valueOf(honorAppId?.trim()))
+
+logger.lifecycle("Teacher app JPush config loaded: sdkPresent=${jpushSdkPresent}, appKeyConfigured=${jpushEnabled}, channel=${jpushChannel}")
+
+android {
+    namespace = "com.qingjia.teacher"
+    compileSdk = rootProject.ext.compileSdkVersion
+    buildFeatures {
+        buildConfig = true
+    }
+    defaultConfig {
+        applicationId "com.qingjia.teacher"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [
+            JPUSH_PKGNAME: applicationId,
+            JPUSH_APPKEY: jpushAppKey,
+            JPUSH_CHANNEL: jpushChannel,
+            VIVO_APPKEY: vivoAppKey,
+            VIVO_APPID: vivoAppId,
+            HONOR_APPID: honorAppId
+        ]
+        buildConfigField 'boolean', 'JPUSH_ENABLED', String.valueOf(jpushEnabled)
+        buildConfigField 'boolean', 'VIVO_PUSH_CONFIGURED', String.valueOf(vivoPushConfigured)
+        buildConfigField 'boolean', 'HONOR_PUSH_CONFIGURED', String.valueOf(honorPushConfigured)
+        buildConfigField 'String', 'JPUSH_CHANNEL', "\"${jpushChannel}\""
+        aaptOptions {
+             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            if (!jpushSdkPresent) {
+                java {
+                    exclude 'com/qingjia/teacher/TeacherJPushPlugin.java'
+                    exclude 'com/qingjia/teacher/TeacherJPushRuntime.java'
+                    exclude 'com/qingjia/teacher/TeacherJPushMessageReceiver.java'
+                    exclude 'com/qingjia/teacher/TeacherJPushService.java'
+                }
+            }
+        }
+    }
+}
+
+repositories {
+    flatDir{
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    implementation "androidx.work:work-runtime:2.10.5"
+    implementation project(':capacitor-android')
+    if (jpushSdkPresent) {
+        implementation files('../jiguang/libs/jcore-android-5.3.1.aar')
+        implementation project(':jiguang')
+    }
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+    implementation project(':capacitor-cordova-android-plugins')
+}
+
+apply from: 'capacitor.build.gradle'
+
+try {
+    def servicesJSON = file('google-services.json')
+    if (servicesJSON.text) {
+        apply plugin: 'com.google.gms.google-services'
+    }
+} catch(Exception e) {
+    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}
