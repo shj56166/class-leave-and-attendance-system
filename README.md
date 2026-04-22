@@ -1,6 +1,15 @@
 # 校园请假管理
 
-面向校园班级场景的学生请假申请、教师审批与统计留痕 Demo，适合演示、二次开发和本地部署。
+面向班级的请假管理系统，可供于统计、考核等简化流程，支持跨平台
+
+## 🚀 Overview
+
+A fullstack attendance and leave management system for schools, featuring:
+
+- 🧾 Leave request & approval workflow
+- 📊 Attendance & truancy analytics
+- 📱 Cross-platform support (Web + PWA + Android)
+- 🔐 Role-based access control (RBAC)
 
 <div style="background-color: #f8fafc; border: 1px solid #e7edf5; border-radius: 10px; padding: 14px 16px; margin: 14px 0 18px 0;">
   <p style="margin: 0 0 8px 0; color: #4a5a70;"><strong>项目形态</strong></p>
@@ -63,6 +72,19 @@
 - 学生进入系统后可直接看到今日状态、最近处理结果、请假入口和课表入口。
 
 ## 技术栈
+
+## 🛠 Tech Stack
+
+- Frontend: Vue 3, Vite, Pinia, Element Plus, Vant
+- Backend: Node.js, Express, Sequelize
+- Database: MySQL
+- Realtime: Socket.IO
+- Auth: JWT
+- Mobile: PWA / Capacitor (Android)
+
+## 🔍 Keywords
+
+attendance system, leave management, workflow approval, student management system, real-time web app, analytics dashboard, fullstack project
 
 ### 后端
 
